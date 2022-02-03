@@ -23,7 +23,7 @@ jobs:
       id: packages
       run: |
         packages=$(git diff HEAD~ --name-only | xargs -I{} dirname {} | sort | uniq | grep -Ev '(\.|metadata|profiles)')
-        echo '::set-output name=packages::$packages'
+        echo "::set-output name=packages::$packages"
       working-directory: ${{github.workspace}}/gentoo-zh
     - name: docker
       run: |
