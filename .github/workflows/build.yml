@@ -13,10 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: docker
-      uses: liangyongxiang/emerge-action@v0.1
+    - name: checkout
+      uses: actions/checkout@v2
       with:
-        packages: dev-cpp/ETL
-        overlay_name: gentoo-zh
-        overlay_sync_type: git
-        overlay_sync_uri: https://github.com/microcai/gentoo-zh.git
+        repository: microcai/gentoo-zh
+        path: gentoo-zh
+    - name: packages
+      id: packages
+      run: |
+        packages=$(git diff HEAD~ --name-only */* | xargs -I{} dirname {} | sort | uniq | grep -Ev '(metadata|profiles)')
+        echo '::set-output name=packages::$packages'
+    - name: docker
+      run: |
+        echo "${{ steps.packages.outputs.packages }}"
+
+    #  uses: liangyongxiang/emerge-action@v0.1
+    #  with:
+    #    packages: dev-cpp/ETL
+    #    overlay_name: gentoo-zh
+    #    overlay_sync_type: git
+    #    overlay_sync_uri: https://github.com/microcai/gentoo-zh.git
