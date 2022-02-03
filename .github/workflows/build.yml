@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: microcai/gentoo-zh
-        fetch-depth: 2
+        fetch-depth: 0
 
     - name: Get changed files
       id: changed-files
