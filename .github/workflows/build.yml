@@ -22,8 +22,9 @@ jobs:
       id: packages
       run: |
         git status
-        git diff HEAD~ --name-only
+        ls .git
         cat .git/HEAD
+        git diff HEAD~ --name-only
         packages=$(git diff HEAD~ --name-only -- */* | xargs -I{} dirname {} | sort | uniq | grep -Ev '(metadata|profiles)')
         echo '::set-output name=packages::$packages'
       working-directory: ${{github.workspace}}/gentoo-zh
