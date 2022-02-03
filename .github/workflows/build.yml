@@ -22,6 +22,8 @@ jobs:
     - name: packages
       id: packages
       run: |
+        git diff HEAD~
+        git diff HEAD~ --name-only
         git diff HEAD~ --name-only -- */*
         packages=$(git diff HEAD~ --name-only -- */* | xargs -I{} dirname {} | sort | uniq | grep -Ev '(metadata|profiles)')
         echo '::set-output name=packages::$packages'
