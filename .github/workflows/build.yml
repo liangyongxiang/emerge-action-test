@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: docker
+      uses: liangyongxiang/emerge-action@master
+      with:
+        packages: dev-cpp/ETL
+        overlay_name: gentoo-zh
+        overlay_sync_type: git
+        overlay_sync_uri: https://github.com/microcai/gentoo-zh.git
