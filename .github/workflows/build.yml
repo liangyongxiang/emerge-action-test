@@ -18,6 +18,7 @@ jobs:
       with:
         repository: microcai/gentoo-zh
         path: gentoo-zh
+        fetch-depth: 5
     - name: packages
       id: packages
       run: |
